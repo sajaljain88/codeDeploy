@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto8
+  build:
+    commands:
+      - echo Build started on `date`
+#      - mvn test
+      - mvn clean install
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - java -jar target/CodeDeploy-0.0.1-SNAPSHOT.jar
+artifacts:
+  files:
+    - target/CodeDeploy-0.0.1-SNAPSHOT.jar
+    - appspec.yml
+  discard-paths: yes
